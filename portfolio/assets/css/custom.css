@@ -1,0 +1,498 @@
+/* =======================================================
+ * Custom Styles - Portfolio Customization
+ * All customizations override template styles
+ * ======================================================== */
+
+/*--------------------------------------------------------------
+# 1. Typography System (1.5 pts)
+--------------------------------------------------------------*/
+
+/* Redefine h1-h3 with distinct font stack, sizes, weights, line-height, letter-spacing */
+h1 {
+  font-family: 'Nunito', 'Georgia', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-family: 'Nunito', 'Georgia', serif;
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-family: 'Nunito', 'Georgia', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0em;
+  margin-bottom: 1rem;
+}
+
+/* Paragraph styles with distinct typography */
+p {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.25rem;
+}
+
+/* Lead paragraphs */
+.lead {
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+}
+
+/* Description text */
+.description {
+  font-size: 1.0625rem;
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.015em;
+}
+
+/*--------------------------------------------------------------
+# 2. Interactive Elements - Links & Buttons (1.5 pts)
+--------------------------------------------------------------*/
+
+/* Links - Distinct default, hover, and active states */
+a {
+  color: #4a9eff;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+a:hover {
+  color: #6bb3ff;
+  border-bottom-color: #6bb3ff;
+  transform: translateY(-1px);
+}
+
+a:active {
+  color: #2d7dd8;
+  border-bottom-color: #2d7dd8;
+  transform: translateY(0);
+}
+
+/* Navigation links - Custom styling */
+.navmenu a {
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: none;
+  padding: 15px 10px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.navmenu a:hover {
+  color: #ffffff;
+  background-color: rgba(74, 158, 255, 0.1);
+  border-left-color: #4a9eff;
+  transform: translateX(5px);
+}
+
+.navmenu a.active {
+  color: #ffffff;
+  background-color: rgba(74, 158, 255, 0.15);
+  border-left-color: #4a9eff;
+  font-weight: 600;
+}
+
+/* Buttons - Distinct default, hover, and active states */
+.btn {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #4a9eff;
+  color: #ffffff;
+  border-color: #4a9eff;
+  box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #6bb3ff;
+  border-color: #6bb3ff;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(74, 158, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  background-color: #2d7dd8;
+  border-color: #2d7dd8;
+  box-shadow: 0 2px 8px rgba(74, 158, 255, 0.4);
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #4a9eff;
+  border-color: #4a9eff;
+}
+
+.btn-outline:hover {
+  background-color: rgba(74, 158, 255, 0.1);
+  color: #6bb3ff;
+  border-color: #6bb3ff;
+  transform: translateY(-2px);
+}
+
+.btn-outline:active {
+  background-color: rgba(74, 158, 255, 0.2);
+  color: #2d7dd8;
+  border-color: #2d7dd8;
+  transform: translateY(0);
+}
+
+/* Form buttons */
+.contact-form .btn,
+form .btn {
+  background-color: #4a9eff;
+  color: #ffffff;
+  border-color: #4a9eff;
+}
+
+.contact-form .btn:hover,
+form .btn:hover {
+  background-color: #6bb3ff;
+  border-color: #6bb3ff;
+  transform: translateY(-2px);
+}
+
+.contact-form .btn:active,
+form .btn:active {
+  background-color: #2d7dd8;
+  border-color: #2d7dd8;
+  transform: translateY(0);
+}
+
+/*--------------------------------------------------------------
+# 3. Spacing Scale & Surfaces (1.5 pts)
+--------------------------------------------------------------*/
+
+/* Consistent spacing scale */
+:root {
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 1rem;       /* 16px */
+  --spacing-md: 1.5rem;     /* 24px */
+  --spacing-lg: 2.5rem;     /* 40px */
+  --spacing-xl: 4rem;       /* 64px */
+  --spacing-2xl: 6rem;      /* 96px */
+}
+
+/* About Section - Apply spacing scale and surface styling */
+#about .about-content {
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(74, 158, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+#about .profile-card {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 1px solid rgba(74, 158, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+#about .stats-grid {
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+#about .details-grid {
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: rgba(74, 158, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(74, 158, 255, 0.1);
+}
+
+/* Resume Section - Apply spacing scale and surface styling */
+#resume .resume-side {
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(74, 158, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: var(--spacing-lg);
+}
+
+#resume .resume-section {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background: rgba(74, 158, 255, 0.03);
+  border-left: 4px solid #4a9eff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+#resume .resume-item {
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+}
+
+/* Portfolio Section - Apply spacing scale and surface styling */
+#portfolio .portfolio-wrap {
+  margin-bottom: var(--spacing-md);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(74, 158, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#portfolio .portfolio-wrap:hover {
+  border-color: rgba(74, 158, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(74, 158, 255, 0.3);
+  transform: translateY(-8px);
+}
+
+#portfolio .filters-wrapper {
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(74, 158, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Section spacing consistency */
+.section {
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl);
+}
+
+.section-title {
+  margin-bottom: var(--spacing-xl);
+}
+
+/*--------------------------------------------------------------
+# 4. Two Components Restyled (1.5 pts)
+--------------------------------------------------------------*/
+
+/* Component 1: Navbar Restyling */
+.header {
+  background: linear-gradient(180deg, rgba(4, 11, 20, 0.95) 0%, rgba(27, 27, 27, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  border-right: 2px solid rgba(74, 158, 255, 0.2);
+}
+
+.header .header-container {
+  background: rgba(27, 27, 27, 0.8);
+  border: 1px solid rgba(74, 158, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  padding: var(--spacing-md);
+}
+
+.navmenu a {
+  border-radius: 10px;
+  margin-bottom: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.navmenu a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, rgba(74, 158, 255, 0.2) 0%, rgba(74, 158, 255, 0.05) 100%);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.navmenu a:hover::before,
+.navmenu a.active::before {
+  width: 100%;
+}
+
+.navmenu a .navicon {
+  transition: transform 0.3s ease;
+}
+
+.navmenu a:hover .navicon,
+.navmenu a.active .navicon {
+  transform: scale(1.2) rotate(5deg);
+  color: #4a9eff;
+}
+
+/* Component 2: Progress Bars Restyling */
+.progress {
+  height: 12px;
+  background: linear-gradient(90deg, rgba(74, 158, 255, 0.1) 0%, rgba(74, 158, 255, 0.05) 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(74, 158, 255, 0.2);
+}
+
+.progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #4a9eff 0%, #6bb3ff 50%, #4a9eff 100%);
+  background-size: 200% 100%;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(74, 158, 255, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: progressShine 2s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+}
+
+/* Skills section progress bars */
+.skills .skill-item .progress {
+  height: 14px;
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.skills .skill-item .progress-bar {
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Resume section progress bars */
+.resume .skill-item .progress {
+  height: 14px;
+  margin-top: var(--spacing-xs);
+}
+
+.resume .skill-item .progress-bar {
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Component 3: Back-to-Top Button Restyling */
+.scroll-top {
+  background: linear-gradient(135deg, #4a9eff 0%, #6bb3ff 100%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(74, 158, 255, 0.4),
+              0 0 0 4px rgba(74, 158, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.scroll-top:hover {
+  background: linear-gradient(135deg, #6bb3ff 0%, #4a9eff 100%);
+  box-shadow: 0 6px 24px rgba(74, 158, 255, 0.6),
+              0 0 0 6px rgba(74, 158, 255, 0.15);
+  transform: translateY(-4px) scale(1.05);
+}
+
+.scroll-top:active {
+  transform: translateY(-2px) scale(1);
+  box-shadow: 0 4px 16px rgba(74, 158, 255, 0.4),
+              0 0 0 4px rgba(74, 158, 255, 0.1);
+}
+
+.scroll-top i {
+  color: #ffffff;
+  font-size: 22px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+/* Responsive adjustments for typography */
+@media (max-width: 992px) {
+  h1 {
+    font-size: 2.75rem;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+  }
+  
+  h3 {
+    font-size: 1.75rem;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+  
+  h2 {
+    font-size: 1.875rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  .section {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+  }
+}
+
