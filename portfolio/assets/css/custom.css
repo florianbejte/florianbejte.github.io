@@ -496,3 +496,332 @@ form .btn:active {
   }
 }
 
+/*--------------------------------------------------------------
+# Optional Task: Styled Lists with Pseudo-elements/Counters (2.0 pts)
+--------------------------------------------------------------*/
+
+/* Unordered List Styling with Custom Pseudo-elements */
+.resume-section ul,
+.resume-item ul {
+  list-style: none;
+  padding-left: 0;
+  margin: var(--spacing-md) 0;
+  counter-reset: list-counter;
+}
+
+.resume-section ul li,
+.resume-item ul li {
+  position: relative;
+  padding-left: var(--spacing-lg);
+  padding-top: var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.7;
+  color: var(--default-color);
+  transition: all 0.3s ease;
+}
+
+.resume-section ul li::before,
+.resume-item ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #4a9eff 0%, #6bb3ff 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2),
+              0 2px 4px rgba(74, 158, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.resume-section ul li:hover::before,
+.resume-item ul li:hover::before {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.3),
+              0 4px 8px rgba(74, 158, 255, 0.4);
+}
+
+.resume-section ul li:hover,
+.resume-item ul li:hover {
+  color: #6bb3ff;
+  padding-left: calc(var(--spacing-lg) + 4px);
+}
+
+/* Nested Unordered Lists */
+.resume-section ul li ul,
+.resume-item ul li ul {
+  margin-top: var(--spacing-sm);
+  margin-left: var(--spacing-md);
+  padding-left: var(--spacing-md);
+  border-left: 2px solid rgba(74, 158, 255, 0.2);
+}
+
+.resume-section ul li ul li::before,
+.resume-item ul li ul li::before {
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #6bb3ff 0%, #4a9eff 100%);
+  box-shadow: 0 0 0 2px rgba(107, 179, 255, 0.2);
+  top: 0.85rem;
+}
+
+/* Ordered List Styling with Custom Counters */
+.achievements-list,
+.resume-section ol {
+  list-style: none;
+  counter-reset: achievement-counter;
+  padding-left: 0;
+  margin: var(--spacing-md) 0;
+}
+
+.achievements-list li,
+.resume-section ol li {
+  counter-increment: achievement-counter;
+  position: relative;
+  padding-left: calc(var(--spacing-xl) + var(--spacing-sm));
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.8;
+  color: var(--default-color);
+  background: rgba(74, 158, 255, 0.03);
+  border-radius: 8px;
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.achievements-list li::before,
+.resume-section ol li::before {
+  content: counter(achievement-counter);
+  position: absolute;
+  left: var(--spacing-sm);
+  top: var(--spacing-sm);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4a9eff 0%, #6bb3ff 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
+  font-family: 'Nunito', sans-serif;
+}
+
+.achievements-list li:hover,
+.resume-section ol li:hover {
+  background: rgba(74, 158, 255, 0.08);
+  border-left-color: #4a9eff;
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(74, 158, 255, 0.2);
+}
+
+.achievements-list li:hover::before,
+.resume-section ol li:hover::before {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(74, 158, 255, 0.5);
+}
+
+/* Nested Lists within Ordered Lists */
+.achievements-list li ul,
+.resume-section ol li ul {
+  list-style: none;
+  margin-top: var(--spacing-sm);
+  margin-left: var(--spacing-md);
+  padding-left: var(--spacing-md);
+  border-left: 2px solid rgba(74, 158, 255, 0.15);
+  counter-reset: nested-counter;
+}
+
+.achievements-list li ul li,
+.resume-section ol li ul li {
+  counter-increment: nested-counter;
+  padding-left: calc(var(--spacing-lg) + var(--spacing-xs));
+  background: rgba(74, 158, 255, 0.02);
+  border-left: 2px solid rgba(74, 158, 255, 0.1);
+  margin-bottom: var(--spacing-xs);
+}
+
+.achievements-list li ul li::before,
+.resume-section ol li ul li::before {
+  content: counter(achievement-counter) '.' counter(nested-counter);
+  position: absolute;
+  left: var(--spacing-md);
+  top: var(--spacing-xs);
+  width: auto;
+  height: 1.5rem;
+  min-width: 2rem;
+  padding: 0 var(--spacing-xs);
+  background: linear-gradient(135deg, #6bb3ff 0%, #4a9eff 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(74, 158, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contact Info List Styling */
+.contact-info {
+  list-style: none;
+  padding-left: 0;
+}
+
+.contact-info li {
+  position: relative;
+  padding-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--default-color);
+}
+
+.contact-info li i {
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  color: #4a9eff;
+  font-size: 1.125rem;
+}
+
+/*--------------------------------------------------------------
+# Optional Task: Tables/Data Blocks (2.0 pts)
+--------------------------------------------------------------*/
+
+/* Skills Table Styling */
+.skills-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: var(--spacing-md) 0;
+  background: rgba(74, 158, 255, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(74, 158, 255, 0.1);
+}
+
+/* Distinct Header Row */
+.skills-table thead {
+  background: linear-gradient(135deg, #4a9eff 0%, #6bb3ff 100%);
+}
+
+.skills-table thead th {
+  padding: var(--spacing-md) var(--spacing-sm);
+  text-align: left;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  font-family: 'Nunito', sans-serif;
+}
+
+.skills-table thead th:first-child {
+  padding-left: var(--spacing-md);
+}
+
+.skills-table thead th:last-child {
+  padding-right: var(--spacing-md);
+  text-align: right;
+}
+
+/* Table Body - Zebra Striping */
+.skills-table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(74, 158, 255, 0.1);
+}
+
+.skills-table tbody tr:nth-child(even) {
+  background: rgba(74, 158, 255, 0.05);
+}
+
+.skills-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Row Hover Effect */
+.skills-table tbody tr:hover {
+  background: rgba(74, 158, 255, 0.12) !important;
+  transform: scale(1.01);
+  box-shadow: 0 2px 8px rgba(74, 158, 255, 0.2);
+}
+
+/* Consistent Cell Padding */
+.skills-table tbody td {
+  padding: var(--spacing-md) var(--spacing-sm);
+  color: var(--default-color);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.skills-table tbody td:first-child {
+  padding-left: var(--spacing-md);
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+.skills-table tbody td:last-child {
+  padding-right: var(--spacing-md);
+}
+
+/* Alignment: Text Left, Numbers Right */
+.skills-table tbody td:nth-child(1),
+.skills-table tbody td:nth-child(2) {
+  text-align: left;
+}
+
+.skills-table tbody td:nth-child(3),
+.skills-table tbody td:nth-child(4) {
+  text-align: right;
+  font-family: 'Nunito', monospace;
+  font-weight: 600;
+  color: #4a9eff;
+}
+
+/* Enhanced styling for proficiency column */
+.skills-table tbody td:nth-child(3) {
+  font-size: 1rem;
+  position: relative;
+}
+
+.skills-table tbody td:nth-child(3)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: linear-gradient(180deg, #4a9eff 0%, #6bb3ff 100%);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  .skills-table {
+    font-size: 0.875rem;
+  }
+  
+  .skills-table thead th,
+  .skills-table tbody td {
+    padding: var(--spacing-sm) var(--spacing-xs);
+  }
+  
+  .skills-table thead th:first-child,
+  .skills-table tbody td:first-child {
+    padding-left: var(--spacing-sm);
+  }
+  
+  .skills-table thead th:last-child,
+  .skills-table tbody td:last-child {
+    padding-right: var(--spacing-sm);
+  }
+}
+
