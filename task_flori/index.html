@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-category {
+            display: inline-block;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Our Products</h1>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="placeholder.svg" alt="Laptop Pro">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Laptop Pro</div>
+                    <span class="product-category">Electronics</span>
+                    <div class="product-price">$1299</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="placeholder.svg" alt="Wireless Earbuds">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Wireless Earbuds</div>
+                    <span class="product-category">Audio</span>
+                    <div class="product-price">$129</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="placeholder.svg" alt="Smart Watch">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Smart Watch</div>
+                    <span class="product-category">Wearables</span>
+                    <div class="product-price">$249</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="placeholder.svg" alt="4K Monitor">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">4K Monitor</div>
+                    <span class="product-category">Electronics</span>
+                    <div class="product-price">$499</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="placeholder.svg" alt="Ergonomic Mouse">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Ergonomic Mouse</div>
+                    <span class="product-category">Accessories</span>
+                    <div class="product-price">$79</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="placeholder.svg" alt="Mechanical Keyboard">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Mechanical Keyboard</div>
+                    <span class="product-category">Accessories</span>
+                    <div class="product-price">$149</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

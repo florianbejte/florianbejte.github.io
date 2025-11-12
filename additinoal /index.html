@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e0f2fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 100px;
+            align-items: flex-start;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .label {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 15px 25px;
+            color: #1e293b;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .left-column .label {
+            order: 0;
+        }
+
+        .right-column .label {
+            order: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column left-column">
+            <div class="label">Seven</div>
+            <div class="label">Eight</div>
+            <div class="label">Nine</div>
+            <div class="label">Ten</div>
+            <div class="label">Eleven</div>
+        </div>
+        <div class="column right-column">
+            <div class="label">One</div>
+            <div class="label">Two</div>
+            <div class="label">Three</div>
+            <div class="label">Four</div>
+            <div class="label">Five</div>
+            <div class="label">Six</div>
+        </div>
+    </div>
+</body>
+</html>
+
+
