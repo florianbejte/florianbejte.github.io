@@ -825,3 +825,227 @@ form .btn:active {
   }
 }
 
+/*--------------------------------------------------------------
+# Custom CSS Animations with @keyframes (2+ animations)
+--------------------------------------------------------------*/
+
+/* Animation 1: Fade-in and Slide-up for Sections */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply fade-in animation to sections */
+.section {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.section[data-aos] {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Animation 2: Button Pulse/Shine Effect */
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3),
+                0 0 0 0 rgba(74, 158, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(74, 158, 255, 0.5),
+                0 0 0 10px rgba(74, 158, 255, 0);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3),
+                0 0 0 0 rgba(74, 158, 255, 0);
+  }
+}
+
+/* Apply pulse animation to primary buttons on hover */
+.btn-primary:hover {
+  animation: buttonPulse 2s ease-in-out infinite;
+}
+
+/* Animation 3: Hero Text Typing Effect Enhancement */
+@keyframes typingGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(74, 158, 255, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(74, 158, 255, 0.8),
+                 0 0 30px rgba(74, 158, 255, 0.6);
+  }
+}
+
+/* Apply glow to typed text */
+.typed {
+  animation: typingGlow 3s ease-in-out infinite;
+}
+
+/*--------------------------------------------------------------
+# CSS-Only Loader (Preloader)
+--------------------------------------------------------------*/
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(4, 11, 20, 0.98) 0%, rgba(27, 27, 27, 0.98) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+/* Spinner Loader */
+#preloader::before {
+  content: '';
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(74, 158, 255, 0.2);
+  border-top-color: #4a9eff;
+  border-radius: 50%;
+  animation: spinnerRotate 1s linear infinite;
+}
+
+/* Spinner Rotation Animation */
+@keyframes spinnerRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulsing Dots Alternative Loader (as decorative element) */
+.loader-dots {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-dots::before,
+.loader-dots::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: #4a9eff;
+  border-radius: 50%;
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.loader-dots::before {
+  animation-delay: 0s;
+}
+
+.loader-dots::after {
+  animation-delay: 0.7s;
+}
+
+/* Dot Pulse Animation */
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+/* Hide preloader when page is loaded */
+#preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/*--------------------------------------------------------------
+# Accessibility: prefers-reduced-motion Support
+--------------------------------------------------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations for users who prefer reduced motion */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep essential transitions but make them instant */
+  .btn,
+  a,
+  .navmenu a {
+    transition: none !important;
+  }
+
+  /* Disable spinner animation */
+  #preloader::before {
+    animation: none !important;
+    border-top-color: #4a9eff;
+  }
+
+  /* Disable pulse animations */
+  .btn-primary:hover {
+    animation: none !important;
+  }
+
+  .typed {
+    animation: none !important;
+  }
+
+  /* Disable fade-in animations but keep content visible */
+  .section {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Disable progress bar animations */
+  .progress-bar {
+    animation: none !important;
+  }
+
+  /* Disable hover transforms */
+  .btn:hover,
+  a:hover,
+  .navmenu a:hover {
+    transform: none !important;
+  }
+
+  .portfolio-wrap:hover {
+    transform: none !important;
+  }
+
+  .scroll-top:hover {
+    transform: none !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Additional Enhancement: Smooth Scroll Behavior
+--------------------------------------------------------------*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
