@@ -933,16 +933,49 @@
                     <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
                   </div>
 
-                  <div class="col-md-6 ">
+                  <div class="col-md-6">
+                    <input type="text" name="surname" class="form-control" placeholder="Your Surname" required="">
+                  </div>
+
+                  <div class="col-md-6">
                     <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
                   </div>
 
-                  <div class="col-12">
-                    <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <div class="col-md-6">
+                    <input type="tel" class="form-control" name="phone" placeholder="Phone Number (e.g., +370 60448290)" required="">
                   </div>
 
                   <div class="col-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                    <input type="text" class="form-control" name="address" placeholder="Your Address" required="">
+                  </div>
+
+                  <!-- Rating Questions -->
+                  <div class="col-12">
+                    <h5 class="rating-section-title">Rate Your Experience</h5>
+                  </div>
+
+                  <div class="col-12">
+                    <label class="rating-label">
+                      <span class="rating-question">1. Quality of Service (1-10):</span>
+                      <span class="rating-value-display" id="rating1-value">5</span>
+                    </label>
+                    <input type="range" name="rating1" class="form-range rating-slider" min="1" max="10" value="5" required="">
+                  </div>
+
+                  <div class="col-12">
+                    <label class="rating-label">
+                      <span class="rating-question">2. User Experience (1-10):</span>
+                      <span class="rating-value-display" id="rating2-value">5</span>
+                    </label>
+                    <input type="range" name="rating2" class="form-range rating-slider" min="1" max="10" value="5" required="">
+                  </div>
+
+                  <div class="col-12">
+                    <label class="rating-label">
+                      <span class="rating-question">3. Overall Satisfaction (1-10):</span>
+                      <span class="rating-value-display" id="rating3-value">5</span>
+                    </label>
+                    <input type="range" name="rating3" class="form-range rating-slider" min="1" max="10" value="5" required="">
                   </div>
 
                   <div class="col-12 text-center">
@@ -950,7 +983,7 @@
                     <div class="error-message"></div>
                     <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                    <button type="submit" class="btn">Send Message</button>
+                    <button type="submit" class="btn">Submit Form</button>
                   </div>
 
                 </div>
@@ -1004,6 +1037,9 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Custom JS File -->
+  <script src="assets/js/custom.js"></script>
 
 </body>
 
