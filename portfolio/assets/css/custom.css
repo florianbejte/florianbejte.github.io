@@ -175,6 +175,7 @@ form .btn {
   background-color: #4a9eff;
   color: #ffffff;
   border-color: #4a9eff;
+  transition: all 0.3s ease;
 }
 
 .contact-form .btn:hover,
@@ -189,6 +190,29 @@ form .btn:active {
   background-color: #2d7dd8;
   border-color: #2d7dd8;
   transform: translateY(0);
+}
+
+/* Disabled Button State */
+.btn-disabled,
+.btn-disabled:hover,
+.btn-disabled:active,
+.btn:disabled {
+  background-color: #95a5a6 !important;
+  border-color: #7f8c8d !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+  transform: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+/* Enabled Button State */
+.btn-enabled {
+  background-color: #4a9eff;
+  border-color: #4a9eff;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 /*--------------------------------------------------------------
@@ -1053,6 +1077,78 @@ html {
 # Contact Form Extensions - Custom Styling
 --------------------------------------------------------------*/
 
+/* Form Labels */
+.form-label {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.5;
+}
+
+/* Input Field States */
+.form-control {
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-control:focus {
+  border-color: #4a9eff;
+  box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+  outline: none;
+}
+
+/* Error State - Red Border */
+.form-control.input-error {
+  border-color: #e74c3c !important;
+  background-color: rgba(231, 76, 60, 0.05);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+}
+
+.form-control.input-error:focus {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2) !important;
+}
+
+/* Valid State - Green Border */
+.form-control.input-valid {
+  border-color: #27ae60 !important;
+  background-color: rgba(39, 174, 96, 0.03);
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+}
+
+.form-control.input-valid:focus {
+  border-color: #229954 !important;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+}
+
+/* Inline Error Messages */
+.error-message-inline {
+  display: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8125rem;
+  color: #e74c3c;
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid #e74c3c;
+  border-radius: 4px;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Rating Section Title */
 .rating-section-title {
   font-family: 'Nunito', sans-serif;
@@ -1357,6 +1453,15 @@ html {
 
 /* Responsive Design for Form Elements */
 @media (max-width: 768px) {
+  .form-label {
+    font-size: 0.875rem;
+  }
+  
+  .error-message-inline {
+    font-size: 0.75rem;
+    padding: 6px var(--spacing-xs);
+  }
+  
   .rating-section-title {
     font-size: 1.125rem;
   }
@@ -1414,6 +1519,14 @@ html {
   .rating-slider::-webkit-slider-thumb:hover,
   .rating-slider::-moz-range-thumb:hover {
     transform: none !important;
+  }
+  
+  .error-message-inline {
+    animation: none !important;
+  }
+  
+  .form-control {
+    transition: none !important;
   }
 }
 

@@ -926,27 +926,37 @@
               <h3>Get In Touch</h3>
               <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis.</p>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <form onsubmit="handleFormSubmit(event)" class="php-email-form">
                 <div class="row gy-4">
 
                   <div class="col-md-6">
+                    <label class="form-label">Name</label>
                     <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                    <div class="error-message-inline" id="name-error"></div>
                   </div>
 
                   <div class="col-md-6">
+                    <label class="form-label">Surname</label>
                     <input type="text" name="surname" class="form-control" placeholder="Your Surname" required="">
+                    <div class="error-message-inline" id="surname-error"></div>
                   </div>
 
                   <div class="col-md-6">
+                    <label class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                    <div class="error-message-inline" id="email-error"></div>
                   </div>
 
                   <div class="col-md-6">
-                    <input type="tel" class="form-control" name="phone" placeholder="Phone Number (e.g., +370 60448290)" required="">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" name="phone" placeholder="+370 XXX XXXXX" required="">
+                    <div class="error-message-inline" id="phone-error"></div>
                   </div>
 
                   <div class="col-12">
-                    <input type="text" class="form-control" name="address" placeholder="Your Address" required="">
+                    <label class="form-label">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Your Address (e.g., Street Name 10)" required="">
+                    <div class="error-message-inline" id="address-error"></div>
                   </div>
 
                   <!-- Rating Questions -->

@@ -3,14 +3,23 @@
  * Author: Florian Bejte
  */
 
-// Wait for DOM to be fully loaded
+// Validation state tracker
+let validationState = {
+  name: false,
+  surname: false,
+  email: false,
+  phone: false,
+  address: false,
+  rating1: true,
+  rating2: true,
+  rating3: true
+};
+
 document.addEventListener('DOMContentLoaded', function() {
   initializeContactForm();
 });
 
-/**
- * Initialize contact form with event listeners and functionality
- */
+
 function initializeContactForm() {
   const contactForm = document.querySelector('.php-email-form');
   
@@ -19,48 +28,308 @@ function initializeContactForm() {
     return;
   }
 
-  // Replace the default form submission
+
   contactForm.addEventListener('submit', handleFormSubmit);
+  
+
+  initializeRealtimeValidation();
+  
+  
+  initializePhoneMasking();
+  
+  updateSubmitButtonState();
 }
 
-/**
- * Handle form submission
- * @param {Event} event - The submit event
- */
+
+function initializeRealtimeValidation() {
+  const nameInput = document.querySelector('[name="name"]');
+  const surnameInput = document.querySelector('[name="surname"]');
+  const emailInput = document.querySelector('[name="email"]');
+  const phoneInput = document.querySelector('[name="phone"]');
+  const addressInput = document.querySelector('[name="address"]');
+  
+  if (!nameInput || !surnameInput || !emailInput || !phoneInput || !addressInput) {
+    console.error('Some form fields not found');
+    return;
+  }
+  
+
+  nameInput.addEventListener('input', () => validateName(nameInput));
+  nameInput.addEventListener('blur', () => validateName(nameInput));
+  
+  surnameInput.addEventListener('input', () => validateSurname(surnameInput));
+  surnameInput.addEventListener('blur', () => validateSurname(surnameInput));
+  
+  emailInput.addEventListener('input', () => validateEmail(emailInput));
+  emailInput.addEventListener('blur', () => validateEmail(emailInput));
+  
+  addressInput.addEventListener('input', () => validateAddress(addressInput));
+  addressInput.addEventListener('blur', () => validateAddress(addressInput));
+  
+  
+}
+
+function validateName(input) {
+  const value = input.value.trim();
+  const errorElement = document.getElementById('name-error');
+  
+  // Check if empty
+  if (value === '') {
+    showError(input, errorElement, 'Name is required');
+    validationState.name = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  const letterPattern = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+  if (!letterPattern.test(value)) {
+    showError(input, errorElement, 'Name must contain only letters');
+    validationState.name = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  if (value.length < 2) {
+    showError(input, errorElement, 'Name must be at least 2 characters');
+    validationState.name = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  hideError(input, errorElement);
+  validationState.name = true;
+  updateSubmitButtonState();
+  return true;
+}
+
+function validateSurname(input) {
+  const value = input.value.trim();
+  const errorElement = document.getElementById('surname-error');
+  
+  if (value === '') {
+    showError(input, errorElement, 'Surname is required');
+    validationState.surname = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  const letterPattern = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+  if (!letterPattern.test(value)) {
+    showError(input, errorElement, 'Surname must contain only letters');
+    validationState.surname = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  if (value.length < 2) {
+    showError(input, errorElement, 'Surname must be at least 2 characters');
+    validationState.surname = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  hideError(input, errorElement);
+  validationState.surname = true;
+  updateSubmitButtonState();
+  return true;
+}
+
+function validateEmail(input) {
+  const value = input.value.trim();
+  const errorElement = document.getElementById('email-error');
+  
+  if (value === '') {
+    showError(input, errorElement, 'Email is required');
+    validationState.email = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(value)) {
+    showError(input, errorElement, 'Please enter a valid email address');
+    validationState.email = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  hideError(input, errorElement);
+  validationState.email = true;
+  updateSubmitButtonState();
+  return true;
+}
+
+function validateAddress(input) {
+  const value = input.value.trim();
+  const errorElement = document.getElementById('address-error');
+  
+  if (value === '') {
+    showError(input, errorElement, 'Address is required');
+    validationState.address = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  if (value.length < 5) {
+    showError(input, errorElement, 'Address must be at least 5 characters');
+    validationState.address = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  const hasLetter = /[a-zA-Z]/.test(value);
+  const hasNumber = /[0-9]/.test(value);
+  
+  if (!hasLetter) {
+    showError(input, errorElement, 'Address must contain letters');
+    validationState.address = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  if (!hasNumber) {
+    showError(input, errorElement, 'Address should contain a number');
+    validationState.address = false;
+    updateSubmitButtonState();
+    return false;
+  }
+  
+  hideError(input, errorElement);
+  validationState.address = true;
+  updateSubmitButtonState();
+  return true;
+}
+
+function initializePhoneMasking() {
+  const phoneInput = document.querySelector('[name="phone"]');
+  const errorElement = document.getElementById('phone-error');
+  
+  if (!phoneInput) {
+    return;
+  }
+  
+  phoneInput.addEventListener('input', function(e) {
+    let value = e.target.value;
+    
+    let digitsOnly = value.replace(/\D/g, '');
+    
+    if (digitsOnly.length === 0) {
+      e.target.value = '';
+      validationState.phone = false;
+      updateSubmitButtonState();
+      return;
+    }
+    
+    if (!digitsOnly.startsWith('370')) {
+      if (digitsOnly.startsWith('370')) {
+      } else if (digitsOnly.startsWith('70')) {
+        digitsOnly = '3' + digitsOnly;
+      } else if (digitsOnly.startsWith('0')) {
+        digitsOnly = '37' + digitsOnly;
+      } else if (digitsOnly.length > 0) {
+        digitsOnly = '370' + digitsOnly;
+      }
+    }
+    
+    digitsOnly = digitsOnly.substring(0, 11);
+    
+    let formatted = '';
+    if (digitsOnly.length > 0) {
+      formatted = '+' + digitsOnly.substring(0, 3);
+      if (digitsOnly.length > 3) {
+        formatted += ' ' + digitsOnly.substring(3, 6);
+      }
+      if (digitsOnly.length > 6) {
+        formatted += ' ' + digitsOnly.substring(6, 11);
+      }
+    }
+    
+    e.target.value = formatted;
+    
+    if (digitsOnly.length < 11) {
+      showError(phoneInput, errorElement, 'Phone number must be 11 digits (+370 XXX XXXXX)');
+      validationState.phone = false;
+    } else if (digitsOnly.length === 11 && digitsOnly.startsWith('370')) {
+      hideError(phoneInput, errorElement);
+      validationState.phone = true;
+    } else {
+      showError(phoneInput, errorElement, 'Invalid Lithuanian phone number format');
+      validationState.phone = false;
+    }
+    
+    updateSubmitButtonState();
+  });
+  
+  phoneInput.addEventListener('blur', function() {
+    const value = phoneInput.value;
+    const digitsOnly = value.replace(/\D/g, '');
+    
+    if (digitsOnly.length === 0) {
+      showError(phoneInput, errorElement, 'Phone number is required');
+      validationState.phone = false;
+      updateSubmitButtonState();
+    }
+  });
+}
+
+function showError(input, errorElement, message) {
+  if (!errorElement) return;
+  
+  input.classList.add('input-error');
+  input.classList.remove('input-valid');
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+}
+
+function hideError(input, errorElement) {
+  if (!errorElement) return;
+  
+  input.classList.remove('input-error');
+  input.classList.add('input-valid');
+  errorElement.textContent = '';
+  errorElement.style.display = 'none';
+}
+
+function updateSubmitButtonState() {
+  const submitButton = document.querySelector('.php-email-form button[type="submit"]');
+  
+  if (!submitButton) return;
+  
+  const allValid = Object.values(validationState).every(state => state === true);
+  
+  if (allValid) {
+    submitButton.disabled = false;
+    submitButton.classList.remove('btn-disabled');
+    submitButton.classList.add('btn-enabled');
+  } else {
+    submitButton.disabled = true;
+    submitButton.classList.add('btn-disabled');
+    submitButton.classList.remove('btn-enabled');
+  }
+}
+
 function handleFormSubmit(event) {
-  // Prevent default form submission and page reload
+ 
   event.preventDefault();
   
-  // Collect form data
   const formData = collectFormData(event.target);
   
-  // Validate form data
   if (!validateFormData(formData)) {
     showErrorMessage('Please fill in all required fields correctly.');
     return;
   }
   
-  // Print data to console
   console.log('Form Data:', formData);
   
-  // Calculate average rating
   const averageRating = calculateAverageRating(formData);
   
-  // Display results below the form
   displayFormResults(formData, averageRating);
   
-  // Show success popup
   showSuccessPopup();
   
-  // Optionally reset the form
   // event.target.reset();
 }
 
-/**
- * Collect all form data into an object
- * @param {HTMLFormElement} form - The form element
- * @returns {Object} Form data object
- */
 function collectFormData(form) {
   return {
     name: form.querySelector('[name="name"]').value.trim(),
@@ -74,24 +343,16 @@ function collectFormData(form) {
   };
 }
 
-/**
- * Validate form data
- * @param {Object} data - Form data object
- * @returns {boolean} True if valid
- */
 function validateFormData(data) {
-  // Check required text fields
   if (!data.name || !data.surname || !data.email || !data.phone || !data.address) {
     return false;
   }
   
-  // Validate email format
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(data.email)) {
     return false;
   }
   
-  // Validate ratings are between 1-10
   if (data.rating1 < 1 || data.rating1 > 10 ||
       data.rating2 < 1 || data.rating2 > 10 ||
       data.rating3 < 1 || data.rating3 > 10) {
@@ -101,40 +362,24 @@ function validateFormData(data) {
   return true;
 }
 
-/**
- * Calculate average rating from three ratings
- * @param {Object} data - Form data object
- * @returns {number} Average rating rounded to 1 decimal
- */
 function calculateAverageRating(data) {
   const sum = data.rating1 + data.rating2 + data.rating3;
   const average = sum / 3;
-  return Math.round(average * 10) / 10; // Round to 1 decimal place
+  return Math.round(average * 10) / 10;
 }
 
-/**
- * Get color based on rating value
- * @param {number} rating - Rating value
- * @returns {string} Color code
- */
 function getRatingColor(rating) {
   if (rating >= 0 && rating < 4) {
-    return '#e74c3c'; // Red
+    return '#e74c3c';
   } else if (rating >= 4 && rating < 7) {
-    return '#f39c12'; // Orange
+    return '#f39c12';
   } else if (rating >= 7 && rating <= 10) {
-    return '#27ae60'; // Green
+    return '#27ae60';
   }
-  return '#333'; // Default color
+  return '#333';
 }
 
-/**
- * Display form results below the form
- * @param {Object} data - Form data object
- * @param {number} average - Average rating
- */
 function displayFormResults(data, average) {
-  // Check if results container exists, if not create it
   let resultsContainer = document.getElementById('form-results');
   
   if (!resultsContainer) {
@@ -142,15 +387,12 @@ function displayFormResults(data, average) {
     resultsContainer.id = 'form-results';
     resultsContainer.className = 'form-results';
     
-    // Insert after the form
     const form = document.querySelector('.php-email-form');
     form.parentNode.insertBefore(resultsContainer, form.nextSibling);
   }
   
-  // Get color for average rating
   const ratingColor = getRatingColor(average);
   
-  // Build results HTML
   const resultsHTML = `
     <div class="results-content">
       <h4>Form Submission Results</h4>
@@ -176,15 +418,10 @@ function displayFormResults(data, average) {
   
   resultsContainer.innerHTML = resultsHTML;
   
-  // Scroll to results
   resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-/**
- * Show success popup notification
- */
 function showSuccessPopup() {
-  // Create popup element
   const popup = document.createElement('div');
   popup.className = 'success-popup';
   popup.innerHTML = `
@@ -197,15 +434,12 @@ function showSuccessPopup() {
     </div>
   `;
   
-  // Add to body
   document.body.appendChild(popup);
   
-  // Trigger animation
   setTimeout(() => {
     popup.classList.add('show');
   }, 10);
   
-  // Remove after 3 seconds
   setTimeout(() => {
     popup.classList.remove('show');
     setTimeout(() => {
@@ -214,17 +448,12 @@ function showSuccessPopup() {
   }, 3000);
 }
 
-/**
- * Show error message
- * @param {string} message - Error message to display
- */
 function showErrorMessage(message) {
   const errorDiv = document.querySelector('.php-email-form .error-message');
   if (errorDiv) {
     errorDiv.textContent = message;
     errorDiv.style.display = 'block';
     
-    // Hide after 5 seconds
     setTimeout(() => {
       errorDiv.style.display = 'none';
     }, 5000);
@@ -233,11 +462,6 @@ function showErrorMessage(message) {
   }
 }
 
-/**
- * Escape HTML to prevent XSS
- * @param {string} text - Text to escape
- * @returns {string} Escaped text
- */
 function escapeHtml(text) {
   const map = {
     '&': '&amp;',
@@ -249,9 +473,7 @@ function escapeHtml(text) {
   return text.replace(/[&<>"']/g, m => map[m]);
 }
 
-/**
- * Update rating value display (for range sliders)
- */
+
 function updateRatingDisplay() {
   const ratingInputs = document.querySelectorAll('input[type="range"][name^="rating"]');
   
@@ -264,7 +486,6 @@ function updateRatingDisplay() {
     }
   });
 }
-
-// Initialize rating displays when DOM is ready
+    
 document.addEventListener('DOMContentLoaded', updateRatingDisplay);
 
