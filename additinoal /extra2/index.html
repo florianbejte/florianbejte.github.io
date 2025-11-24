@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florian task 2 </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .image-container {
+            position: relative;
+            max-width: 100%;
+            width: auto;
+        }
+
+        .image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .label {
+            position: absolute;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .top-right {
+            top: 20px;
+            right: 20px;
+        }
+
+        .centered {
+            top: 50%;
+            left: 50%;
+        }
+
+        .bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .bottom-right {
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="image.jpg" alt="image">
+        <div class="label top-left">Top Left</div>
+        <div class="label top-right">Top Right</div>
+        <div class="label centered">Centered</div>
+        <div class="label bottom-left">Bottom Left</div>
+        <div class="label bottom-right">Bottom Right</div>
+    </div>
+</body>
+</html>

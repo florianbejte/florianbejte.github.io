@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buse kurt</title>
+  
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    
+    body{
+      background:linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#24243e 100%);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:20px;
+    }
+    
+    .calculator{
+      background:rgba(30,30,50,0.95);
+      backdrop-filter:blur(10px);
+      border-radius:25px;
+      padding:35px;
+      box-shadow:0 25px 80px rgba(0,0,0,0.6),0 0 1px rgba(255,255,255,0.1) inset;
+      max-width:420px;
+      width:100%;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    
+    .display{
+      background:linear-gradient(135deg,rgba(50,50,80,0.8) 0%,rgba(40,40,65,0.9) 100%);
+      border-radius:18px;
+      padding:28px;
+      margin-bottom:25px;
+      min-height:140px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      align-items:flex-end;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:inset 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .expression{
+      color:#a8aacc;
+      font-size:24px;
+      margin-bottom:10px;
+      min-height:30px;
+      word-wrap:break-word;
+      text-align:right;
+      width:100%;
+      opacity:0.8;
+    }
+    
+    .result{
+      color:#e8eaff;
+      font-size:56px;
+      font-weight:300;
+      letter-spacing:-2px;
+      width:100%;
+      text-align:right;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      text-shadow:0 2px 8px rgba(0,0,0,0.3);
+    }
+    
+    .buttons{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    
+    button{
+      background:linear-gradient(135deg,rgba(60,60,95,0.9) 0%,rgba(45,45,75,0.95) 100%);
+      border:1px solid rgba(255,255,255,0.05);
+      border-radius:12px;
+      color:#e0e0ff;
+      font-size:28px;
+      padding:0;
+      height:75px;
+      cursor:pointer;
+      font-weight:400;
+      box-shadow:0 5px 20px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:all 0.2s ease;
+    }
+    
+    button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 7px 25px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    
+    button:active{
+      transform:translateY(0);
+      box-shadow:0 3px 10px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    
+    .zero{grid-column:span 2;}
+    
+    .equals{
+      background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      color:#ffffff;
+      font-weight:500;
+      box-shadow:0 5px 20px rgba(102,126,234,0.3),inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    
+    .equals:hover{
+      box-shadow:0 7px 25px rgba(102,126,234,0.5),inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    
+    .operator{
+      color:#ff9f43;
+      font-weight:500;
+    }
+    
+    .function{
+      color:#78e08f;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="calculator">
+    <div class="display">
+      <div class="expression" id="expression"></div>
+      <div class="result" id="result">0</div>
+    </div>
+    
+    <div class="buttons">
+      <button class="function" onclick="clearCalculator()">C</button>
+      <button class="function" onclick="toggleSign()">±</button>
+      <button class="function" onclick="percentage()">%</button>
+      <button class="operator" onclick="appendOperator('÷')">÷</button>
+      <button onclick="appendNumber('7')">7</button>
+      <button onclick="appendNumber('8')">8</button>
+      <button onclick="appendNumber('9')">9</button>
+      <button class="operator" onclick="appendOperator('×')">×</button>
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
+      <button class="operator" onclick="appendOperator('-')">-</button>
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button class="operator" onclick="appendOperator('+')">+</button>
+      <button class="zero" onclick="appendNumber('0')">0</button>
+      <button onclick="appendDecimal()">.</button>
+      <button class="equals" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    // State variables
+    var currentInput='-62',expression='5 + 10 - 57 - 20 =',shouldResetInput=true;
+    var resultDisplay=document.getElementById('result'),expressionDisplay=document.getElementById('expression');
+
+    // Display update function
+    var updateDisplay=function(){
+      resultDisplay.textContent=currentInput;
+      expressionDisplay.textContent=expression;
+    };
+
+    // Number input handler
+    var appendNumber=function(num){
+      if(shouldResetInput||currentInput==='0'){
+        currentInput=num;shouldResetInput=false;
+      }else{currentInput+=num;}
+      updateDisplay();
+    };
+
+    // Decimal point handler
+    var appendDecimal=function(){
+      if(shouldResetInput){currentInput='0';shouldResetInput=false;}
+      if(!currentInput.includes('.')){currentInput+='.';}
+      updateDisplay();
+    };
+
+    // Operator input handler
+    var appendOperator=function(op){
+      if(expression&&!shouldResetInput){calculate();}
+      expression=currentInput+' '+op+' ';
+      shouldResetInput=true;
+      updateDisplay();
+    };
+
+    // Main calculation function
+    var calculate=function(){
+      if(!expression) return;
+      const fullExpression=expression+currentInput;
+      try{
+        // Convert display operators to JS operators
+        let calcExpression=fullExpression.replace(/×/g,'*').replace(/÷/g,'/');
+        const result=eval(calcExpression);
+        expressionDisplay.textContent=fullExpression+' =';
+        currentInput=String(Math.round(result*100000000)/100000000);
+        resultDisplay.textContent=currentInput;
+        expression='';
+        shouldResetInput=true;
+      }catch(error){
+        currentInput='Error';expression='';updateDisplay();
+      }
+    };
+
+    // Clear all
+    var clearCalculator=function(){
+      currentInput='0';expression='';shouldResetInput=false;updateDisplay();
+    };
+
+    // Toggle positive/negative
+    var toggleSign=function(){
+      if(currentInput!=='0'){
+        if(currentInput.startsWith('-')){currentInput=currentInput.substring(1);}
+        else{currentInput='-'+currentInput;}
+        updateDisplay();
+      }
+    };
+
+    // Percentage calculation
+    var percentage=function(){
+      currentInput=String(parseFloat(currentInput)/100);updateDisplay();
+    };
+
+    // Keyboard event listener
+    document.addEventListener('keydown',function(e){
+      if(e.key>='0'&&e.key<='9'){appendNumber(e.key);}
+      else if(e.key==='.'){appendDecimal();}
+      else if(e.key==='+'||e.key==='-'){appendOperator(e.key);}
+      else if(e.key==='*'){appendOperator('×');}
+      else if(e.key==='/'){e.preventDefault();appendOperator('÷');}
+      else if(e.key==='Enter'||e.key==='='){e.preventDefault();calculate();}
+      else if(e.key==='Escape'||e.key==='c'||e.key==='C'){clearCalculator();}
+      else if(e.key==='%'){percentage();}
+    });
+
+    // Initialize display
+    updateDisplay();
+  </script>
+
+</body>
+
+</html>
