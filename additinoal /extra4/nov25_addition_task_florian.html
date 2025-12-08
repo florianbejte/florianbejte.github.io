@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Florian Arsal Bejte Ekfu24/1 20240035 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+      :root {
+        --bg-gradient: linear-gradient(135deg, #c084fc, #e879f9, #f472b6);
+        --card-bg: rgba(255, 255, 255, 0.85);
+        --input-bg: #e0f2fe;
+        --item-bg: #e0f2fe;
+        --btn-gradient: linear-gradient(to right, #4ade80, #3b82f6);
+        --text-color: #4b5563;
+        --muted-color: #9ca3af;
+        --danger-color: #f87171;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to right, #a855f7, #ec4899, #f97316);
+        padding: 20px;
+      }
+
+      .app-container {
+        background: var(--card-bg);
+        width: 100%;
+        max-width: 600px;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        text-align: center;
+        color: #9ca3af;
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        letter-spacing: -1px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .input-wrapper {
+        position: relative;
+        margin-bottom: 30px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 18px 25px;
+        padding-right: 110px;
+        border-radius: 15px;
+        border: none;
+        background: #e0f2fe;
+        font-size: 1rem;
+        color: var(--text-color);
+        outline: none;
+      }
+
+      input[type="text"]:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      }
+
+      input[type="text"]::placeholder {
+        color: #9ca3af;
+        font-weight: 500;
+      }
+
+      .add-btn {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        bottom: 8px;
+        padding: 0 25px;
+        border: none;
+        border-radius: 50px;
+        background: var(--btn-gradient);
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .add-btn:hover {
+        opacity: 0.95;
+      }
+
+      .add-btn:active {
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      li {
+        background: #e0f2fe;
+        padding: 18px 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #475569;
+        font-weight: 500;
+        font-size: 1.05rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+
+      li:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      li.completed {
+        text-decoration: line-through;
+        color: #9ca3af;
+        opacity: 0.8;
+      }
+
+      .todo-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+        flex: 1;
+      }
+
+      .checkbox {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #cbd5e1;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+      }
+
+      li.completed .checkbox {
+        background: #9ca3af;
+        border-color: #9ca3af;
+      }
+
+      .checkbox svg {
+        width: 16px;
+        height: 16px;
+        color: white;
+        display: none;
+      }
+
+      li.completed .checkbox svg {
+        display: block;
+      }
+
+      .delete-btn {
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #f87171;
+        opacity: 0.8;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .delete-btn:hover {
+        opacity: 1;
+        background: #fef2f2;
+        color: #ef4444;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <h1>Todo App</h1>
+
+      <div class="input-wrapper">
+        <input type="text" id="todoInput" placeholder="Add a new todo" />
+        <button class="add-btn" onclick="add_new_thing()">
+          <span>+</span> Add
+        </button>
+      </div>
+
+      <ul id="todoList"></ul>
+    </div>
+
+    <script>
+      let my_list = [
+        { id: 1, txt: "Complete React tutorial", is_done: false },
+        { id: 2, txt: "Write unit tests", is_done: false },
+        { id: 3, txt: "Design user interface", is_done: true },
+        { id: 4, txt: "Implement authentication", is_done: false },
+        { id: 5, txt: "Set up CI/CD pipeline", is_done: false },
+        { id: 6, txt: "Optimize database queries", is_done: true },
+        { id: 7, txt: "Deploy to production", is_done: false },
+      ];
+
+      const ul_element = document.getElementById("todoList");
+      const inp = document.getElementById("todoInput");
+
+      function show_list() {
+        ul_element.innerHTML = "";
+        my_list.forEach((item) => {
+          const li = document.createElement("li");
+          if (item.is_done) li.classList.add("completed");
+
+          li.innerHTML = `
+                    <div class="todo-left" onclick="change_status(${item.id})">
+                        <div class="checkbox">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>${item.txt}</span>
+                    </div>
+                    <button class="delete-btn" onclick="remove_item(${item.id})">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    </button>
+                `;
+          ul_element.appendChild(li);
+        });
+      }
+
+      function add_new_thing() {
+        const val = inp.value.trim();
+        if (val) {
+          const obj = {
+            id: Date.now(),
+            txt: val,
+            is_done: false,
+          };
+          my_list.unshift(obj);
+          inp.value = "";
+          show_list();
+        }
+      }
+
+      function change_status(id) {
+        my_list = my_list.map((x) =>
+          x.id === id ? { ...x, is_done: !x.is_done } : x
+        );
+        show_list();
+      }
+
+      function remove_item(id) {
+        my_list = my_list.filter((x) => x.id !== id);
+        show_list();
+      }
+
+      inp.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") add_new_thing();
+      });
+
+      show_list();
+    </script>
+  </body>
+</html>

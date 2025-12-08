@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Florian Arsal Bejtek</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game">
+      <h1>Rock Paper Scissors Lizard Spock</h1>
+
+      <div class="scoreboard" id="score">Player: 0 | Computer: 0</div>
+
+      <div class="options">
+        <button class="btn" id="rock" onclick="playRound('rock')">
+          Rock 🪨
+        </button>
+        <button class="btn" id="paper" onclick="playRound('paper')">
+          Paper 📄
+        </button>
+        <button class="btn" id="scissors" onclick="playRound('scissors')">
+          Scissors ✂️
+        </button>
+        <button class="btn" id="lizard" onclick="playRound('lizard')">
+          Lizard 🦎
+        </button>
+        <button class="btn" id="spock" onclick="playRound('spock')">
+          Spock 🖖
+        </button>
+      </div>
+
+      <div class="result">
+        <p id="resultText">Choose your weapon!</p>
+        <p id="reasonText"></p>
+        <p id="computerChoice"></p>
+      </div>
+
+      <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

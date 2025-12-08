@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christmas Postcard Florian</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Florian bejte ekfu24/1 20240035 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Mountains+of+Christmas:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Christmas Postcard Generator</h1>
+      </header>
+
+      <div class="generator-wrapper">
+        <aside class="controls">
+          <div class="control-group">
+            <label>Border Style</label>
+            <select id="border-control">
+              <option value="all">All Sides</option>
+              <option value="top-bottom">Top & Bottom</option>
+              <option value="left-right">Left & Right</option>
+              <option value="none">None</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label>Select Image</label>
+            <div class="image-selector">
+              <label>
+                <input type="radio" name="image" value="image1.png" checked />
+                <span>Image 1</span>
+              </label>
+              <label>
+                <input type="radio" name="image" value="image2.png" />
+                <span>Image 2</span>
+              </label>
+              <label>
+                <input type="radio" name="image" value="image3.png" />
+                <span>Image 3</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>Layout</label>
+            <select id="layout-control">
+              <option value="layout-1">Layout 1 (Classic)</option>
+              <option value="layout-2">Layout 2 (Centered)</option>
+              <option value="layout-3">Layout 3 (Modern)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label>Font Family</label>
+            <select id="font-control">
+              <option value="'Mountains of Christmas', cursive">
+                Mountains of Christmas
+              </option>
+              <option value="'Dancing Script', cursive">Dancing Script</option>
+              <option value="'Roboto', sans-serif">Roboto</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label>Text Color</label>
+            <div class="color-selector">
+              <button
+                class="color-btn selected"
+                data-color="#c0392b"
+                style="background-color: #c0392b"
+              ></button>
+              <button
+                class="color-btn"
+                data-color="#27ae60"
+                style="background-color: #27ae60"
+              ></button>
+              <button
+                class="color-btn"
+                data-color="#2c3e50"
+                style="background-color: #2c3e50"
+              ></button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>Message</label>
+            <textarea id="message-input" rows="3">Merry Christmas!</textarea>
+          </div>
+        </aside>
+
+        <!-- Preview Section -->
+        <main class="preview-area">
+          <div id="postcard" class="postcard border-all layout-1">
+            <div class="postcard-content">
+              <div class="main-image-container">
+                <img
+                  id="postcard-image"
+                  src="image1.png"
+                  alt="Christmas Decoration"
+                />
+              </div>
+              <div class="text-content">
+                <h2 id="postcard-message">Merry Christmas!</h2>
+                <div class="stamp-area">
+                  <div class="stamp">
+                    <span>POST</span>
+                  </div>
+                </div>
+                <div class="address-lines">
+                  <div class="line"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
