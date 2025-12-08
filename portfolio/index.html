@@ -72,6 +72,7 @@
           <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
           <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
           <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
+          <li><a href="#memory-game"><i class="bi bi-controller navicon"></i> Memory Game</a></li>
           <li class="dropdown"><a href="#"><i class="bi bi-menu-button navicon"></i> <span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
@@ -868,6 +869,105 @@
       </div>
 
     </section><!-- /Testimonials Section -->
+
+    <!-- Memory Game Section -->
+    <section id="memory-game" class="memory-game section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Memory Game</h2>
+        <p>Test your memory skills with this interactive flip card game. Match all pairs in the fewest moves possible!</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            
+            <!-- Game Controls -->
+            <div class="game-controls" data-aos="fade-up" data-aos-delay="150">
+              <div class="difficulty-selector">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty" class="form-select">
+                  <option value="easy">Easy (4×3)</option>
+                  <option value="hard">Hard (6×4)</option>
+                </select>
+              </div>
+              
+              <div class="game-buttons">
+                <button id="start-game" class="btn btn-game btn-start">
+                  <i class="bi bi-play-fill"></i> Start Game
+                </button>
+                <button id="restart-game" class="btn btn-game btn-restart" disabled>
+                  <i class="bi bi-arrow-clockwise"></i> Restart
+                </button>
+              </div>
+            </div>
+
+            <!-- Stats Panel -->
+            <div class="stats-panel" data-aos="fade-up" data-aos-delay="200">
+              <div class="stat-box">
+                <i class="bi bi-hand-index"></i>
+                <div class="stat-info">
+                  <span class="stat-value" id="moves-count">0</span>
+                  <span class="stat-label">Moves</span>
+                </div>
+              </div>
+              <div class="stat-box">
+                <i class="bi bi-check2-circle"></i>
+                <div class="stat-info">
+                  <span class="stat-value" id="matches-count">0</span>
+                  <span class="stat-label">Matches</span>
+                </div>
+              </div>
+              <div class="stat-box">
+                <i class="bi bi-stopwatch"></i>
+                <div class="stat-info">
+                  <span class="stat-value" id="timer-display">00:00</span>
+                  <span class="stat-label">Time</span>
+                </div>
+              </div>
+              <div class="stat-box best-score">
+                <i class="bi bi-trophy"></i>
+                <div class="stat-info">
+                  <span class="stat-value" id="best-score">--</span>
+                  <span class="stat-label">Best (Moves)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="game-board-wrapper" data-aos="zoom-in" data-aos-delay="250">
+              <div id="game-board" class="game-board easy">
+                <!-- Cards will be generated dynamically by JavaScript -->
+                <div class="game-placeholder">
+                  <i class="bi bi-controller"></i>
+                  <p>Click "Start Game" to begin!</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Win Message -->
+            <div id="win-message" class="win-message hidden">
+              <div class="win-content">
+                <div class="win-icon">
+                  <i class="bi bi-trophy-fill"></i>
+                </div>
+                <h3>Congratulations!</h3>
+                <p class="win-stats">You completed the game in <span id="final-moves">0</span> moves and <span id="final-time">00:00</span>!</p>
+                <p class="new-record hidden" id="new-record">🎉 New Best Score! 🎉</p>
+                <button id="play-again" class="btn btn-game btn-start">
+                  <i class="bi bi-arrow-clockwise"></i> Play Again
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Memory Game Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
